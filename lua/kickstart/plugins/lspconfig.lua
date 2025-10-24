@@ -238,20 +238,23 @@ return {
         },
       }
 
-      require('java').setup {
-        -- Your custom jdtls settings goes here
-      }
+      --require('java').setup {
+      -- Your custom jdtls settings goes here
+      --}
+      vim.lsp.config['java'] = {}
 
-      require('lspconfig').jdtls.setup {
-        -- Your custom nvim-java configuration goes here
-      }
+      --require('lspconfig').jdtls.setup {
+      -- Your custom nvim-java configuration goes here
+      --}
+      vim.lsp.config['jdtls'] = {}
 
       -- The following loop will configure each server with the capabilities we defined above.
       -- This will ensure that all servers have the same base configuration, but also
       -- allow for server-specific overrides.
       for server_name, server_config in pairs(servers) do
         server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
-        require('lspconfig')[server_name].setup(server_config)
+        --require('lspconfig')[server_name].setup(server_config)
+        vim.lsp.config(server_name, server_config)
       end
 
       -- Ensure the servers and tools above are installed
