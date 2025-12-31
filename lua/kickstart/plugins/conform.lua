@@ -42,7 +42,7 @@ return {
       formatters = {
         ['clang-format'] = {
           -- This argument forces 4-space indentation directly in the command
-          prepend_args = { '--style={IndentWidth: 4, TabWidth: 4, UseTab: Never, AccessModifierOffset: -4}' },
+          prepend_args = { '--style={IndentWidth: 4, TabWidth: 4, UseTab: Never, AccessModifierOffset: -4, ColumnLimit: 120}' },
         },
       },
     },
