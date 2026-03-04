@@ -124,6 +124,38 @@ return {
       },
     }
 
+    dap.configurations.cpp = {
+      {
+        name = 'Auto-Debug Project (codelldb)',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          -- 1. Get the current working directory
+          local cwd = vim.fn.getcwd()
+
+          -- 2. Extract the name of the root folder (e.g., "SakuraVNE")
+          local project_name = vim.fn.fnamemodify(cwd, ':t')
+
+          -- 3. Construct your specific build path
+          local auto_path = cwd .. '/build/bin/Debug-linux-x86_64/' .. project_name .. '/' .. project_name
+
+          -- 4. Check if it actually exists. If it does, run it instantly!
+          if vim.fn.filereadable(auto_path) == 1 then
+            return auto_path
+          end
+
+          -- 5. Fallback: If it couldn't find it, pop open an input box so you can type it manually
+          return vim.fn.input('Path to executable: ', cwd .. '/build/bin/Debug-linux-x86_64/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {}, -- Add command line arguments here if your engine ever needs them
+      },
+    }
+
+    -- Tell C to use the exact same configuration as C++
+    dap.configurations.c = dap.configurations.cpp
+
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -138,6 +170,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'codelldb',
       },
     }
 
