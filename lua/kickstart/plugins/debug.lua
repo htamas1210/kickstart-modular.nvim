@@ -137,7 +137,7 @@ return {
           local project_name = vim.fn.fnamemodify(cwd, ':t')
 
           -- 3. Construct your specific build path
-          local auto_path = cwd .. '/build/bin/Debug-linux-x86_64/' .. project_name .. '/' .. project_name
+          local auto_path = cwd .. '/build/bin/Debug-Linux-x86_64/' .. project_name .. '/' .. project_name
 
           -- 4. Check if it actually exists. If it does, run it instantly!
           if vim.fn.filereadable(auto_path) == 1 then
@@ -145,7 +145,7 @@ return {
           end
 
           -- 5. Fallback: If it couldn't find it, pop open an input box so you can type it manually
-          return vim.fn.input('Path to executable: ', cwd .. '/build/bin/Debug-linux-x86_64/', 'file')
+          return vim.fn.input('Path to executable: ', cwd .. '/build/bin/Debug-Linux-x86_64/', 'file')
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
