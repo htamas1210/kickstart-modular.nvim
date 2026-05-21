@@ -22,7 +22,7 @@ return {
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      'nvim-java/nvim-java',
+      { 'nvim-java/nvim-java', opts = {} },
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
@@ -238,14 +238,10 @@ return {
         },
       }
 
-      --require('java').setup {
-      -- Your custom jdtls settings goes here
-      --}
+      require('java').setup {}
       vim.lsp.config['java'] = {}
 
-      --require('lspconfig').jdtls.setup {
-      -- Your custom nvim-java configuration goes here
-      --}
+      -- require('lspconfig').jdtls.setup {}
       vim.lsp.config['jdtls'] = {}
 
       -- The following loop will configure each server with the capabilities we defined above.
