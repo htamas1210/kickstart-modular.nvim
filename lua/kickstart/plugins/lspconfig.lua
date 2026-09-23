@@ -260,12 +260,8 @@ return {
         },
       }
 
-      require('java').setup {}
-      vim.lsp.config['java'] = {}
-
-      -- require('lspconfig').jdtls.setup {}
-      vim.lsp.config['jdtls'] = {}
-
+      vim.lsp.config['java'] = {} -- REMOVE
+      vim.lsp.config['jdtls'] = {} -- REMOVE
       -- The following loop will configure each server with the capabilities we defined above.
       -- This will ensure that all servers have the same base configuration, but also
       -- allow for server-specific overrides.
@@ -291,6 +287,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'jdtls',
         'arduino-language-server',
         'clang-format',
         'clangd',
